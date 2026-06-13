@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { CLINIC_NAME } from "@/lib/constants";
 
 /**
  * WhatsApp notifications via the Meta WhatsApp Cloud API.
@@ -76,12 +77,12 @@ export async function sendAppointmentWhatsApp(opts: {
   if (!opts.phone) return;
 
   const messages: Record<typeof opts.kind, string> = {
-    requested: `Bonjour ${opts.name}, votre demande de rendez-vous (${opts.serviceName}) le ${opts.date} à ${opts.time} a bien été reçue. Vous recevrez une confirmation prochainement. — Cabinet Kiné Santé`,
-    confirmed: `Bonjour ${opts.name}, votre rendez-vous (${opts.serviceName}) est confirmé le ${opts.date} à ${opts.time}. À bientôt ! — Cabinet Kiné Santé`,
-    rejected: `Bonjour ${opts.name}, le créneau demandé le ${opts.date} à ${opts.time} n'est plus disponible. Merci de choisir un autre horaire sur votre espace patient. — Cabinet Kiné Santé`,
-    cancelled: `Bonjour ${opts.name}, votre rendez-vous du ${opts.date} à ${opts.time} a été annulé. — Cabinet Kiné Santé`,
-    rescheduled: `Bonjour ${opts.name}, votre rendez-vous (${opts.serviceName}) a été déplacé au ${opts.date} à ${opts.time}. — Cabinet Kiné Santé`,
-    reminder: `Bonjour ${opts.name}, rappel : rendez-vous ${opts.serviceName} demain ${opts.date} à ${opts.time}. — Cabinet Kiné Santé`,
+    requested: `Bonjour ${opts.name}, votre demande de rendez-vous (${opts.serviceName}) le ${opts.date} à ${opts.time} a bien été reçue. Vous recevrez une confirmation prochainement. — ${CLINIC_NAME}`,
+    confirmed: `Bonjour ${opts.name}, votre rendez-vous (${opts.serviceName}) est confirmé le ${opts.date} à ${opts.time}. À bientôt ! — ${CLINIC_NAME}`,
+    rejected: `Bonjour ${opts.name}, le créneau demandé le ${opts.date} à ${opts.time} n'est plus disponible. Merci de choisir un autre horaire sur votre espace patient. — ${CLINIC_NAME}`,
+    cancelled: `Bonjour ${opts.name}, votre rendez-vous du ${opts.date} à ${opts.time} a été annulé. — ${CLINIC_NAME}`,
+    rescheduled: `Bonjour ${opts.name}, votre rendez-vous (${opts.serviceName}) a été déplacé au ${opts.date} à ${opts.time}. — ${CLINIC_NAME}`,
+    reminder: `Bonjour ${opts.name}, rappel : rendez-vous ${opts.serviceName} demain ${opts.date} à ${opts.time}. — ${CLINIC_NAME}`,
   };
 
   await sendWhatsAppMessage({

@@ -7,6 +7,7 @@ import { useSession, signOut } from "next-auth/react";
 import { Menu, X, CalendarCheck, UserRound, LogOut, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { CLINIC_NAME } from "@/lib/constants";
 
 const links = [
   { href: "/", label: "Accueil" },
@@ -15,7 +16,7 @@ const links = [
   { href: "/contact", label: "Contact" },
 ];
 
-export function Navbar() {
+export function Navbar({ clinicName = CLINIC_NAME }: { clinicName?: string }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -31,7 +32,7 @@ export function Navbar() {
             <CalendarCheck className="h-5 w-5" aria-hidden />
           </span>
           <span className="font-display text-lg font-semibold text-primary-900">
-            Cabinet Kiné Santé
+            {clinicName}
           </span>
         </Link>
 

@@ -19,6 +19,7 @@ import {
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CLINIC_NAME } from "@/lib/constants";
 
 const allLinks = [
   { href: "/admin", label: "Tableau de bord", icon: LayoutDashboard, roles: ["ADMIN"] },
@@ -127,7 +128,7 @@ export function AdminSidebar({
       <aside className="sticky top-0 hidden h-screen w-64 flex-col bg-primary-900 lg:flex">
         <div className="flex h-16 items-center gap-2 border-b border-white/10 px-6">
           <span className="font-display text-lg font-semibold text-white">
-            Cabinet Kiné Santé
+            {CLINIC_NAME}
           </span>
         </div>
         {nav}

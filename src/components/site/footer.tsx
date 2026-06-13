@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CalendarCheck, MapPin, Phone, Mail } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+import { CLINIC_NAME } from "@/lib/constants";
 
 export async function Footer() {
   const settings = await prisma.clinicSettings
@@ -16,7 +17,7 @@ export async function Footer() {
               <CalendarCheck className="h-5 w-5" aria-hidden />
             </span>
             <span className="font-display text-lg font-semibold">
-              {settings?.clinicName ?? "Cabinet Kiné Santé"}
+              {settings?.clinicName ?? CLINIC_NAME}
             </span>
           </div>
           <p className="text-sm leading-relaxed text-primary-100/80">
@@ -72,7 +73,7 @@ export async function Footer() {
       <div className="border-t border-white/10">
         <div className="container flex flex-col items-center justify-between gap-2 py-5 text-xs text-primary-100/60 md:flex-row">
           <p>
-            © {new Date().getFullYear()} {settings?.clinicName ?? "Cabinet Kiné Santé"}. Tous
+            © {new Date().getFullYear()} {settings?.clinicName ?? CLINIC_NAME}. Tous
             droits réservés.
           </p>
           <p>Kinésithérapie — Rééducation — Bien-être</p>

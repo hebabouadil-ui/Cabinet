@@ -32,6 +32,11 @@ export async function POST(req: Request) {
     const hashed = await bcrypt.hash(password, 12);
     const verifyToken = randomBytes(32).toString("hex");
 
+    // When transactional email isn't configured, verification links can't be
+    // delivered — so activate the account immediately instead of locking the
+    // patient out of booking.
+    const emailEnabled = !!process.env.RESEND_API_KEY;
+
     const user = await prisma.user.create({
       data: {
         name,
@@ -39,19 +44,22 @@ export async function POST(req: Request) {
         phone,
         password: hashed,
         role: "PATIENT",
-        verifyToken,
+        verifyToken: emailEnabled ? verifyToken : null,
+        emailVerified: emailEnabled ? null : new Date(),
         patient: { create: {} },
       },
     });
 
-    await sendVerificationEmail({
-      to: normalizedEmail,
-      name,
-      token: verifyToken,
-      userId: user.id,
-    });
+    if (emailEnabled) {
+      await sendVerificationEmail({
+        to: normalizedEmail,
+        name,
+        token: verifyToken,
+        userId: user.id,
+      });
+    }
 
-    return NextResponse.json({ ok: true }, { status: 201 });
+    return NextResponse.json({ ok: true, verified: !emailEnabled }, { status: 201 });
   } catch (error) {
     console.error("[register]", error);
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });

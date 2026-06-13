@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 export function RegisterForm() {
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [verified, setVerified] = useState(false);
 
   const {
     register,
@@ -34,6 +35,7 @@ export function RegisterForm() {
         toast.error(json.error ?? "Une erreur est survenue.");
         return;
       }
+      setVerified(!!json.verified);
       setDone(true);
     } catch {
       toast.error("Une erreur est survenue. Veuillez réessayer.");
@@ -47,14 +49,15 @@ export function RegisterForm() {
       <div className="text-center">
         <MailCheck className="mx-auto mb-4 h-12 w-12 text-primary-600" aria-hidden />
         <h1 className="mb-2 font-display text-2xl font-semibold text-primary-900">
-          Vérifiez votre boîte mail
+          {verified ? "Compte créé !" : "Vérifiez votre boîte mail"}
         </h1>
         <p className="text-sm text-gray-600">
-          Nous vous avons envoyé un lien de confirmation. Cliquez dessus pour activer
-          votre compte, puis connectez-vous.
+          {verified
+            ? "Votre compte est activé. Vous pouvez vous connecter et prendre rendez-vous."
+            : "Nous vous avons envoyé un lien de confirmation. Cliquez dessus pour activer votre compte, puis connectez-vous."}
         </p>
         <Link href="/login" className="mt-6 inline-block">
-          <Button variant="outline">Aller à la connexion</Button>
+          <Button>Se connecter</Button>
         </Link>
       </div>
     );

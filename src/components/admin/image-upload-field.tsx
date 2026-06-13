@@ -3,8 +3,9 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { toast } from "sonner";
-import { ImagePlus, Loader2, X } from "lucide-react";
+import { ImagePlus, Link2, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export function ImageUploadField({
@@ -20,6 +21,8 @@ export function ImageUploadField({
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
+  const [showUrl, setShowUrl] = useState(false);
+  const [urlValue, setUrlValue] = useState("");
 
   const upload = async (file: File) => {
     setUploading(true);
@@ -58,20 +61,56 @@ export function ImageUploadField({
           </button>
         </div>
       ) : (
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => inputRef.current?.click()}
-          disabled={uploading}
-          className="w-full"
-        >
-          {uploading ? (
-            <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-          ) : (
-            <ImagePlus className="h-4 w-4" aria-hidden />
+        <div className="space-y-2">
+          <div className="flex gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => inputRef.current?.click()}
+              disabled={uploading}
+              className="flex-1"
+            >
+              {uploading ? (
+                <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+              ) : (
+                <ImagePlus className="h-4 w-4" aria-hidden />
+              )}
+              Téléverser
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setShowUrl((v) => !v)}
+              className="flex-1"
+            >
+              <Link2 className="h-4 w-4" aria-hidden />
+              Coller un lien
+            </Button>
+          </div>
+          {showUrl && (
+            <div className="flex gap-2">
+              <Input
+                placeholder="https://exemple.com/photo.jpg"
+                value={urlValue}
+                onChange={(e) => setUrlValue(e.target.value)}
+              />
+              <Button
+                type="button"
+                onClick={() => {
+                  if (!/^https?:\/\//.test(urlValue.trim())) {
+                    toast.error("Entrez une URL d'image valide (https://...).");
+                    return;
+                  }
+                  onChange(urlValue.trim());
+                  setUrlValue("");
+                  setShowUrl(false);
+                }}
+              >
+                OK
+              </Button>
+            </div>
           )}
-          Téléverser une image
-        </Button>
+        </div>
       )}
       <input
         ref={inputRef}

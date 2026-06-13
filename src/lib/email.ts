@@ -1,11 +1,12 @@
 import { Resend } from "resend";
 import { prisma } from "@/lib/prisma";
+import { CLINIC_NAME } from "@/lib/constants";
 
 const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 
-const FROM = process.env.EMAIL_FROM ?? "Cabinet Kiné <onboarding@resend.dev>";
+const FROM = process.env.EMAIL_FROM ?? `${CLINIC_NAME} <onboarding@resend.dev>`;
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
 function layout(title: string, content: string) {
@@ -16,14 +17,14 @@ function layout(title: string, content: string) {
     <tr><td align="center">
       <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;">
         <tr><td style="background:#0f766e;padding:24px 32px;">
-          <h1 style="margin:0;color:#ffffff;font-size:20px;">Cabinet Kiné Santé</h1>
+          <h1 style="margin:0;color:#ffffff;font-size:20px;">${CLINIC_NAME}</h1>
         </td></tr>
         <tr><td style="padding:32px;">
           <h2 style="margin:0 0 16px;color:#134e4a;font-size:18px;">${title}</h2>
           <div style="color:#374151;font-size:15px;line-height:1.6;">${content}</div>
         </td></tr>
         <tr><td style="padding:16px 32px;background:#f8fafc;color:#94a3b8;font-size:12px;">
-          Cet email vous a été envoyé par le Cabinet Kiné Santé. Merci de ne pas y répondre directement.
+          Cet email vous a été envoyé par le ${CLINIC_NAME}. Merci de ne pas y répondre directement.
         </td></tr>
       </table>
     </td></tr>

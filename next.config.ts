@@ -3,10 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "standalone",
   images: {
-    remotePatterns: [
-      { protocol: "https", hostname: "res.cloudinary.com" },
-      { protocol: "https", hostname: "images.unsplash.com" },
-    ],
+    // Allow any HTTPS image source so admins can paste image links from
+    // anywhere (Cloudinary, Unsplash, social media, etc.)
+    remotePatterns: [{ protocol: "https", hostname: "**" }],
   },
 };
 

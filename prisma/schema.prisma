@@ -133,7 +133,7 @@ model BlockedDate {
 
 model ClinicSettings {
   id              String   @id @default("singleton")
-  clinicName      String   @default("Cabinet Kiné Santé")
+  clinicName      String   @default("Cabinet Ibn Sina")
   tagline         String?
   phone           String?
   email           String?

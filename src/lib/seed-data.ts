@@ -1,5 +1,6 @@
 import type { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { CLINIC_NAME, CLINIC_TAGLINE } from "./constants";
 
 const services = [
   {
@@ -252,11 +253,11 @@ export async function runSeed(prisma: PrismaClient) {
 
   await prisma.clinicSettings.upsert({
     where: { id: "singleton" },
-    update: {},
+    update: { clinicName: CLINIC_NAME, tagline: CLINIC_TAGLINE },
     create: {
       id: "singleton",
-      clinicName: "Cabinet Kiné Santé",
-      tagline: "Kinésithérapie & rééducation",
+      clinicName: CLINIC_NAME,
+      tagline: CLINIC_TAGLINE,
       phone: "+212 6 00 00 00 00",
       email: "contact@cabinet-physio.com",
       whatsapp: "+212600000000",
