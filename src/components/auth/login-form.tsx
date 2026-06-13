@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -43,7 +43,14 @@ export function LoginForm() {
       return;
     }
 
-    router.push(callbackUrl);
+    // Staff members land on the admin panel unless an explicit destination was requested
+    const session = await getSession();
+    const isStaff =
+      session?.user.role === "ADMIN" || session?.user.role === "RECEPTIONIST";
+    const destination =
+      isStaff && !searchParams.get("callbackUrl") ? "/admin" : callbackUrl;
+
+    router.push(destination);
     router.refresh();
   };
 

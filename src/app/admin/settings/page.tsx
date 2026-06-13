@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { SettingsForm } from "@/components/admin/settings-form";
+import { PasswordForm } from "@/components/admin/password-form";
 
 export const metadata: Metadata = { title: "Paramètres — Admin" };
 export const dynamic = "force-dynamic";
@@ -34,6 +35,7 @@ export default async function AdminSettingsPage() {
           linkedinUrl: settings.linkedinUrl ?? "",
         }}
       />
+      <PasswordForm />
     </div>
   );
 }
