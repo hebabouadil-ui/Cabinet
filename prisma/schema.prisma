@@ -1,0 +1,228 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  RECEPTIONIST
+  PATIENT
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  REJECTED
+}
+
+enum NotificationType {
+  EMAIL
+  WHATSAPP
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  FAILED
+}
+
+model User {
+  id                String    @id @default(cuid())
+  name              String
+  email             String    @unique
+  emailVerified     DateTime?
+  password          String
+  role              Role      @default(PATIENT)
+  phone             String?
+  image             String?
+  verifyToken       String?   @unique
+  resetToken        String?   @unique
+  resetTokenExpiry  DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  patient       Patient?
+  notifications Notification[]
+  adminNotes    AdminNote[]    @relation("NoteAuthor")
+
+  @@index([role])
+  @@index([createdAt])
+}
+
+model Patient {
+  id             String    @id @default(cuid())
+  userId         String    @unique
+  dateOfBirth    DateTime?
+  address        String?
+  medicalHistory String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  appointments Appointment[]
+  notes        AdminNote[]
+}
+
+model Service {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  name            String
+  excerpt         String
+  description     String
+  duration        Int      @default(45)
+  price           Float    @default(0)
+  image           String?
+  icon            String?
+  featured        Boolean  @default(false)
+  active          Boolean  @default(true)
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  appointments Appointment[]
+
+  @@index([active, order])
+}
+
+model Appointment {
+  id           String            @id @default(cuid())
+  patientId    String
+  serviceId    String
+  date         DateTime
+  startTime    String
+  endTime      String
+  status       AppointmentStatus @default(PENDING)
+  patientNote  String?
+  cancelReason String?
+  price        Float?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  patient       Patient        @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  service       Service        @relation(fields: [serviceId], references: [id])
+  notifications Notification[]
+
+  @@index([date, status])
+  @@index([patientId])
+  @@index([serviceId])
+  @@index([status])
+}
+
+model Availability {
+  id        String  @id @default(cuid())
+  dayOfWeek Int // 0 = Sunday ... 6 = Saturday
+  startTime String // "09:00"
+  endTime   String // "18:00"
+  isActive  Boolean @default(true)
+
+  @@unique([dayOfWeek, startTime])
+  @@index([dayOfWeek, isActive])
+}
+
+model BlockedDate {
+  id     String   @id @default(cuid())
+  date   DateTime @unique
+  reason String?
+}
+
+model ClinicSettings {
+  id              String   @id @default("singleton")
+  clinicName      String   @default("Cabinet Kiné Santé")
+  tagline         String?
+  phone           String?
+  email           String?
+  whatsapp        String?
+  address         String?
+  mapEmbedUrl     String?
+  slotDuration    Int      @default(45)
+  bufferMinutes   Int      @default(0)
+  maxAdvanceDays  Int      @default(60)
+  facebookUrl     String?
+  instagramUrl    String?
+  linkedinUrl     String?
+  updatedAt       DateTime @updatedAt
+}
+
+model ContentBlock {
+  id       String  @id @default(cuid())
+  key      String  @unique // e.g. "hero", "about-intro", "benefits"
+  title    String?
+  subtitle String?
+  body     String?
+  image    String?
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String?
+  content   String
+  rating    Int      @default(5)
+  image     String?
+  approved  Boolean  @default(false)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([approved, order])
+}
+
+model Faq {
+  id       String  @id @default(cuid())
+  question String
+  answer   String
+  order    Int     @default(0)
+  active   Boolean @default(true)
+
+  @@index([active, order])
+}
+
+model Notification {
+  id            String             @id @default(cuid())
+  userId        String?
+  appointmentId String?
+  type          NotificationType
+  status        NotificationStatus @default(PENDING)
+  subject       String
+  body          String
+  sentAt        DateTime?
+  createdAt     DateTime           @default(now())
+
+  user        User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  appointment Appointment? @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([userId])
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  publicId  String   @unique
+  url       String
+  folder    String   @default("general")
+  format    String?
+  width     Int?
+  height    Int?
+  bytes     Int?
+  createdAt DateTime @default(now())
+
+  @@index([folder])
+}
+
+model AdminNote {
+  id        String   @id @default(cuid())
+  patientId String
+  authorId  String
+  content   String
+  createdAt DateTime @default(now())
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  author  User    @relation("NoteAuthor", fields: [authorId], references: [id])
+
+  @@index([patientId, createdAt])
+}

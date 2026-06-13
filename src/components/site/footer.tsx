@@ -1,0 +1,83 @@
+import Link from "next/link";
+import { CalendarCheck, MapPin, Phone, Mail } from "lucide-react";
+import { prisma } from "@/lib/prisma";
+
+export async function Footer() {
+  const settings = await prisma.clinicSettings
+    .findUnique({ where: { id: "singleton" } })
+    .catch(() => null);
+
+  return (
+    <footer className="bg-primary-900 text-primary-50">
+      <div className="container grid gap-10 py-14 md:grid-cols-4">
+        <div className="space-y-4 md:col-span-2 md:pr-12">
+          <div className="flex items-center gap-2">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10">
+              <CalendarCheck className="h-5 w-5" aria-hidden />
+            </span>
+            <span className="font-display text-lg font-semibold">
+              {settings?.clinicName ?? "Cabinet Kiné Santé"}
+            </span>
+          </div>
+          <p className="text-sm leading-relaxed text-primary-100/80">
+            {settings?.tagline ??
+              "Cabinet de kinésithérapie dédié au soulagement de la douleur, à la rééducation et au retour au mouvement. Prise de rendez-vous en ligne 24h/24."}
+          </p>
+        </div>
+
+        <div>
+          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary-100">
+            Navigation
+          </h3>
+          <ul className="space-y-2 text-sm text-primary-100/80">
+            <li><Link href="/services" className="hover:text-white">Nos soins</Link></li>
+            <li><Link href="/about" className="hover:text-white">À propos</Link></li>
+            <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+            <li><Link href="/book" className="hover:text-white">Prendre rendez-vous</Link></li>
+            <li><Link href="/login" className="hover:text-white">Espace patient</Link></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary-100">
+            Contact
+          </h3>
+          <ul className="space-y-3 text-sm text-primary-100/80">
+            {settings?.address && (
+              <li className="flex items-start gap-2">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+                {settings.address}
+              </li>
+            )}
+            {settings?.phone && (
+              <li className="flex items-center gap-2">
+                <Phone className="h-4 w-4 shrink-0" aria-hidden />
+                <a href={`tel:${settings.phone.replace(/\s/g, "")}`} className="hover:text-white">
+                  {settings.phone}
+                </a>
+              </li>
+            )}
+            {settings?.email && (
+              <li className="flex items-center gap-2">
+                <Mail className="h-4 w-4 shrink-0" aria-hidden />
+                <a href={`mailto:${settings.email}`} className="hover:text-white">
+                  {settings.email}
+                </a>
+              </li>
+            )}
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
+        <div className="container flex flex-col items-center justify-between gap-2 py-5 text-xs text-primary-100/60 md:flex-row">
+          <p>
+            © {new Date().getFullYear()} {settings?.clinicName ?? "Cabinet Kiné Santé"}. Tous
+            droits réservés.
+          </p>
+          <p>Kinésithérapie — Rééducation — Bien-être</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
