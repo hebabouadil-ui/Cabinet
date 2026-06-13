@@ -32,9 +32,9 @@ const galleryImages = [
 ];
 
 export default async function AboutPage() {
-  const blocks = await prisma.contentBlock.findMany({
-    where: { key: { in: ["about-intro", "therapist"] } },
-  });
+  const blocks = await prisma.contentBlock
+    .findMany({ where: { key: { in: ["about-intro", "therapist"] } } })
+    .catch(() => []);
   const intro = blocks.find((b) => b.key === "about-intro");
   const therapist = blocks.find((b) => b.key === "therapist");
 

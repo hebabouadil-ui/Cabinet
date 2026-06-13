@@ -12,19 +12,20 @@ import {
 export const revalidate = 300;
 
 export default async function HomePage() {
+  // Fallbacks keep the build green when the database is empty or unreachable
   const [services, testimonials, faqs, blocks] = await Promise.all([
-    prisma.service.findMany({
-      where: { active: true },
-      orderBy: { order: "asc" },
-      take: 8,
-    }),
-    prisma.testimonial.findMany({
-      where: { approved: true },
-      orderBy: { order: "asc" },
-      take: 3,
-    }),
-    prisma.faq.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
-    prisma.contentBlock.findMany({ where: { key: { in: ["hero", "therapist"] } } }),
+    prisma.service
+      .findMany({ where: { active: true }, orderBy: { order: "asc" }, take: 8 })
+      .catch(() => []),
+    prisma.testimonial
+      .findMany({ where: { approved: true }, orderBy: { order: "asc" }, take: 3 })
+      .catch(() => []),
+    prisma.faq
+      .findMany({ where: { active: true }, orderBy: { order: "asc" } })
+      .catch(() => []),
+    prisma.contentBlock
+      .findMany({ where: { key: { in: ["hero", "therapist"] } } })
+      .catch(() => []),
   ]);
 
   const heroBlock = blocks.find((b) => b.key === "hero") ?? null;
