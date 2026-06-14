@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { FadeIn } from "@/components/site/motion";
 import { ContactForm } from "@/components/site/contact-form";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Contact",

@@ -9,7 +9,7 @@ import {
   CtaSection,
 } from "@/components/site/home-sections";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   // Fallbacks keep the build green when the database is empty or unreachable

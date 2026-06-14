@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/site/motion";
 import { CtaSection } from "@/components/site/home-sections";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Nos soins",

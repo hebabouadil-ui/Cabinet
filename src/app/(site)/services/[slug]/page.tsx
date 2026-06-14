@@ -8,16 +8,9 @@ import { formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/site/motion";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 type Props = { params: Promise<{ slug: string }> };
-
-export async function generateStaticParams() {
-  const services = await prisma.service
-    .findMany({ where: { active: true }, select: { slug: true } })
-    .catch(() => []);
-  return services.map((s) => ({ slug: s.slug }));
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
