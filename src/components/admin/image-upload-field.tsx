@@ -8,6 +8,32 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+/**
+ * Downscales an image in the browser (max 1200px, JPEG) so it can be stored
+ * even without Cloudinary. Falls back to the original file on any failure.
+ */
+async function resizeImage(file: File, maxSize = 1200): Promise<Blob> {
+  if (!file.type.startsWith("image/") || file.type === "image/gif") return file;
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, maxSize / Math.max(bitmap.width, bitmap.height));
+    const width = Math.round(bitmap.width * scale);
+    const height = Math.round(bitmap.height * scale);
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return file;
+    ctx.drawImage(bitmap, 0, 0, width, height);
+    const blob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob(resolve, "image/jpeg", 0.85)
+    );
+    return blob ?? file;
+  } catch {
+    return file;
+  }
+}
+
 export function ImageUploadField({
   label,
   folder,
@@ -27,8 +53,9 @@ export function ImageUploadField({
   const upload = async (file: File) => {
     setUploading(true);
     try {
+      const resized = await resizeImage(file);
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", resized, "photo.jpg");
       formData.append("folder", folder);
       const res = await fetch("/api/admin/media", { method: "POST", body: formData });
       const json = await res.json();

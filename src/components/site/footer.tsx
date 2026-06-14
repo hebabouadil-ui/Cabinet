@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CalendarCheck, MapPin, Phone, Mail } from "lucide-react";
+import { CalendarCheck, Facebook, Instagram, Linkedin, MapPin, Phone, Mail } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { CLINIC_NAME } from "@/lib/constants";
 
@@ -24,6 +24,43 @@ export async function Footer() {
             {settings?.tagline ??
               "Cabinet de kinésithérapie dédié au soulagement de la douleur, à la rééducation et au retour au mouvement. Prise de rendez-vous en ligne 24h/24."}
           </p>
+          {(settings?.facebookUrl || settings?.instagramUrl || settings?.linkedinUrl) && (
+            <div className="flex gap-3 pt-1">
+              {settings?.facebookUrl && (
+                <a
+                  href={settings.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
+                >
+                  <Facebook className="h-4 w-4" aria-hidden />
+                </a>
+              )}
+              {settings?.instagramUrl && (
+                <a
+                  href={settings.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
+                >
+                  <Instagram className="h-4 w-4" aria-hidden />
+                </a>
+              )}
+              {settings?.linkedinUrl && (
+                <a
+                  href={settings.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/20"
+                >
+                  <Linkedin className="h-4 w-4" aria-hidden />
+                </a>
+              )}
+            </div>
+          )}
         </div>
 
         <div>

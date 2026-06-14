@@ -5,6 +5,8 @@ import {
   AlignCenter,
   ArrowRight,
   Award,
+  Bone,
+  Brain,
   CalendarCheck,
   Clock,
   Dumbbell,
@@ -18,6 +20,8 @@ import {
   Stethoscope,
   Syringe,
   Users,
+  Waves,
+  Wind,
 } from "lucide-react";
 import type { ContentBlock, Faq, Service, Testimonial } from "@prisma/client";
 import { Button } from "@/components/ui/button";
@@ -27,13 +31,18 @@ import { THERAPIST_NAME, THERAPIST_TITLE } from "@/lib/constants";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Activity,
-  Dumbbell,
   AlignCenter,
-  PersonStanding,
-  HeartPulse,
+  Bone,
+  Brain,
+  Dumbbell,
   Hand,
-  Syringe,
+  HeartPulse,
   Home,
+  PersonStanding,
+  Stethoscope,
+  Syringe,
+  Waves,
+  Wind,
 };
 
 export function Hero({ block }: { block: ContentBlock | null }) {

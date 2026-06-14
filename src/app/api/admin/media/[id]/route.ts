@@ -19,9 +19,12 @@ export async function DELETE(
       return NextResponse.json({ error: "Image introuvable" }, { status: 404 });
     }
 
-    await deleteImage(media.publicId).catch((e) =>
-      console.error("[cloudinary destroy]", e)
-    );
+    // Locally-stored images (data URLs) have no Cloudinary asset to remove
+    if (!media.publicId.startsWith("local_")) {
+      await deleteImage(media.publicId).catch((e) =>
+        console.error("[cloudinary destroy]", e)
+      );
+    }
     await prisma.media.delete({ where: { id } });
 
     return NextResponse.json({ ok: true });

@@ -9,108 +9,108 @@ import {
 
 const services = [
   {
-    slug: "physiotherapy",
-    name: "Kinésithérapie générale",
+    slug: "reeducation-neurologie",
+    name: "Rééducation en neurologie",
     excerpt:
-      "Bilans complets et traitements personnalisés pour restaurer votre mobilité et soulager la douleur.",
+      "Prise en charge des suites d'AVC, de la sclérose en plaques, de Parkinson et des atteintes neurologiques.",
     description:
-      "Notre prise en charge en kinésithérapie générale commence par un bilan approfondi de votre posture, de votre mobilité et de vos antécédents. Nous élaborons ensuite un programme de soins sur mesure combinant thérapie manuelle, exercices thérapeutiques et éducation du patient pour des résultats durables.",
+      "La rééducation neurologique vise à récupérer la motricité, l'équilibre et l'autonomie après un accident vasculaire cérébral, un traumatisme ou dans le cadre d'une maladie neurologique (Parkinson, sclérose en plaques, neuropathies). Le programme associe travail de la marche, renforcement, coordination et stimulation fonctionnelle, adapté au rythme de chaque patient.",
     duration: 45,
-    price: 60,
+    price: 0,
     featured: true,
     order: 1,
-    icon: "Activity",
+    icon: "Brain",
   },
   {
-    slug: "sports-rehabilitation",
-    name: "Rééducation sportive",
+    slug: "reeducation-traumatologie-sport",
+    name: "Rééducation en traumatologie et du sport",
     excerpt:
-      "Retour au sport sécurisé après blessure grâce à des protocoles de rééducation progressifs.",
+      "Récupération après entorse, fracture ou blessure sportive et retour à l'activité en toute sécurité.",
     description:
-      "Spécialement conçue pour les sportifs amateurs et professionnels, notre rééducation sportive associe renforcement musculaire ciblé, travail proprioceptif et réathlétisation progressive. Objectif : un retour au terrain plus fort et sans récidive.",
-    duration: 60,
-    price: 75,
+      "Destinée aux sportifs comme aux patients après un traumatisme, cette rééducation traite entorses, tendinites, déchirures musculaires et suites de fractures. Elle combine thérapie manuelle, renforcement progressif, travail proprioceptif et réathlétisation pour un retour au sport ou à la vie quotidienne sans récidive.",
+    duration: 45,
+    price: 0,
     featured: true,
     order: 2,
     icon: "Dumbbell",
   },
   {
-    slug: "back-pain",
-    name: "Traitement du mal de dos",
+    slug: "reeducation-rhumatologie",
+    name: "Rééducation en rhumatologie",
     excerpt:
-      "Soulagement des lombalgies, hernies discales et douleurs chroniques du rachis.",
+      "Soulagement de l'arthrose, des lombalgies et des douleurs articulaires chroniques.",
     description:
-      "Lombalgie aiguë, hernie discale ou douleur chronique : nous combinons thérapie manuelle vertébrale, méthode McKenzie et renforcement du tronc pour traiter la cause et non seulement les symptômes.",
+      "Arthrose, lombalgie, cervicalgie, tendinopathies ou maladies inflammatoires : la rééducation rhumatologique soulage la douleur, entretient la mobilité articulaire et renforce les muscles stabilisateurs. L'objectif est d'améliorer durablement le confort et la qualité de vie au quotidien.",
     duration: 45,
-    price: 60,
+    price: 0,
     featured: true,
     order: 3,
-    icon: "AlignCenter",
+    icon: "Activity",
   },
   {
-    slug: "neck-pain",
-    name: "Traitement des cervicalgies",
+    slug: "reeducation-respiratoire",
+    name: "Rééducation respiratoire (adultes et enfants)",
     excerpt:
-      "Prise en charge des douleurs cervicales, torticolis et céphalées de tension.",
+      "Kinésithérapie respiratoire pour bronchiolite, encombrement et affections pulmonaires chroniques.",
     description:
-      "Les douleurs cervicales liées au travail sur écran, au stress ou aux traumatismes (coup du lapin) répondent très bien à notre approche : mobilisations douces, relâchement myofascial et correction posturale.",
-    duration: 45,
-    price: 60,
+      "La kinésithérapie respiratoire aide à désencombrer les voies aériennes et à améliorer la capacité respiratoire. Adaptée aux adultes (BPCO, post-opératoire, asthme) comme aux enfants et nourrissons (bronchiolite, encombrement), elle utilise des techniques douces et sécurisées.",
+    duration: 30,
+    price: 0,
     featured: false,
     order: 4,
-    icon: "PersonStanding",
+    icon: "Wind",
   },
   {
-    slug: "post-surgery",
-    name: "Rééducation post-opératoire",
+    slug: "reeducation-orthopedie",
+    name: "Rééducation en orthopédie",
     excerpt:
-      "Récupération optimale après chirurgie orthopédique : genou, épaule, hanche, rachis.",
+      "Récupération après chirurgie ou traumatisme orthopédique : prothèses, ligamentoplasties, fractures.",
     description:
-      "Après une ligamentoplastie, une prothèse ou une chirurgie du rachis, la rééducation conditionne le résultat final. Nous suivons les protocoles chirurgicaux tout en adaptant chaque séance à votre progression réelle.",
-    duration: 60,
-    price: 70,
+      "Après une prothèse de hanche ou de genou, une ligamentoplastie ou une chirurgie du rachis, la rééducation orthopédique conditionne la qualité de la récupération. Nous suivons les protocoles chirurgicaux tout en adaptant chaque séance à votre progression : mobilité, renforcement et reprise des appuis.",
+    duration: 45,
+    price: 0,
     featured: true,
     order: 5,
-    icon: "HeartPulse",
+    icon: "Bone",
   },
   {
-    slug: "manual-therapy",
-    name: "Thérapie manuelle",
+    slug: "massage-therapeutique",
+    name: "Massage thérapeutique professionnel",
     excerpt:
-      "Techniques manuelles avancées : mobilisations articulaires et relâchement myofascial.",
+      "Massages thérapeutiques pour relâcher les tensions, soulager la douleur et favoriser la récupération.",
     description:
-      "La thérapie manuelle orthopédique utilise des mobilisations et manipulations précises pour restaurer le jeu articulaire, diminuer la douleur et améliorer la fonction. Une approche fondée sur les preuves, adaptée à chaque patient.",
-    duration: 45,
-    price: 65,
+      "Le massage thérapeutique professionnel agit sur les contractures, les tensions musculaires et la circulation. Il complète la rééducation en réduisant la douleur, en améliorant la souplesse des tissus et en favorisant une détente profonde.",
+    duration: 30,
+    price: 0,
     featured: false,
     order: 6,
     icon: "Hand",
   },
   {
-    slug: "dry-needling",
-    name: "Dry Needling",
+    slug: "physiotherapie",
+    name: "Physiothérapie",
     excerpt:
-      "Puncture sèche des points gâchettes pour un soulagement rapide des tensions musculaires.",
+      "Électrothérapie, ultrasons et physiothérapie instrumentale pour accélérer la guérison.",
     description:
-      "Le dry needling consiste à insérer une aiguille fine et stérile dans les points gâchettes myofasciaux responsables de douleurs référées. Efficace sur les contractures rebelles, il s'intègre dans un plan de traitement global.",
+      "La physiothérapie utilise des agents physiques — électrothérapie, ultrasons, ondes, chaleur et froid — pour diminuer la douleur, réduire l'inflammation et stimuler la cicatrisation des tissus. Elle s'intègre dans un plan de traitement global pour des résultats optimaux.",
     duration: 30,
-    price: 50,
+    price: 0,
     featured: false,
     order: 7,
-    icon: "Syringe",
+    icon: "Stethoscope",
   },
   {
-    slug: "home-visits",
-    name: "Soins à domicile",
+    slug: "pressotherapie",
+    name: "Pressothérapie",
     excerpt:
-      "Kinésithérapie à domicile pour les patients à mobilité réduite ou en post-opératoire.",
+      "Drainage par compression pour les jambes lourdes, l'œdème et la récupération circulatoire.",
     description:
-      "Lorsque le déplacement au cabinet est difficile, nous venons à vous avec le matériel nécessaire. Idéal pour les personnes âgées, les suites opératoires immédiates ou les affections neurologiques.",
-    duration: 60,
-    price: 80,
+      "La pressothérapie applique une compression pneumatique progressive sur les membres pour stimuler la circulation veineuse et lymphatique. Elle soulage les jambes lourdes, réduit les œdèmes et favorise la récupération après l'effort ou une chirurgie.",
+    duration: 30,
+    price: 0,
     featured: false,
     order: 8,
-    icon: "Home",
+    icon: "Waves",
   },
 ];
 
@@ -211,7 +211,7 @@ export async function runSeed(prisma: PrismaClient) {
 
   await prisma.user.upsert({
     where: { email: process.env.ADMIN_EMAIL ?? "admin@cabinet-physio.com" },
-    update: {},
+    update: { name: THERAPIST_NAME },
     create: {
       name: THERAPIST_NAME,
       email: process.env.ADMIN_EMAIL ?? "admin@cabinet-physio.com",
@@ -229,6 +229,20 @@ export async function runSeed(prisma: PrismaClient) {
     });
   }
 
+  // Remove demo services that are no longer part of the real offer
+  const keepSlugs = services.map((s) => s.slug);
+  const stale = await prisma.service.findMany({
+    where: { slug: { notIn: keepSlugs } },
+    include: { _count: { select: { appointments: true } } },
+  });
+  for (const s of stale) {
+    if (s._count.appointments === 0) {
+      await prisma.service.delete({ where: { id: s.id } });
+    } else {
+      await prisma.service.update({ where: { id: s.id }, data: { active: false } });
+    }
+  }
+
   if ((await prisma.faq.count()) === 0) {
     await prisma.faq.createMany({ data: faqs });
   }
@@ -240,36 +254,53 @@ export async function runSeed(prisma: PrismaClient) {
   for (const block of contentBlocks) {
     await prisma.contentBlock.upsert({
       where: { key: block.key },
-      update: {},
+      // Refresh the practitioner's name/title/bio on re-run, but never the
+      // image (which the admin sets from the panel)
+      update:
+        block.key === "therapist"
+          ? { title: block.title, subtitle: block.subtitle, body: block.body }
+          : {},
       create: block,
     });
   }
 
-  // Default working hours: Monday-Friday 09:00-13:00 / 14:00-19:00, Saturday morning
-  if ((await prisma.availability.count()) === 0) {
-    const slots = [];
-    for (let day = 1; day <= 5; day++) {
-      slots.push({ dayOfWeek: day, startTime: "09:00", endTime: "13:00" });
-      slots.push({ dayOfWeek: day, startTime: "14:00", endTime: "19:00" });
-    }
-    slots.push({ dayOfWeek: 6, startTime: "09:00", endTime: "13:00" });
-    await prisma.availability.createMany({ data: slots });
-  }
+  // Real opening hours (Safi). Reset so a re-run reflects the schedule.
+  const hours = [
+    { dayOfWeek: 1, startTime: "10:00", endTime: "12:30" },
+    { dayOfWeek: 1, startTime: "14:00", endTime: "17:30" },
+    { dayOfWeek: 2, startTime: "10:00", endTime: "12:30" },
+    { dayOfWeek: 2, startTime: "14:00", endTime: "17:30" },
+    { dayOfWeek: 3, startTime: "10:00", endTime: "12:30" },
+    { dayOfWeek: 3, startTime: "14:00", endTime: "17:30" },
+    { dayOfWeek: 4, startTime: "10:00", endTime: "12:30" },
+    { dayOfWeek: 4, startTime: "14:00", endTime: "17:30" },
+    { dayOfWeek: 5, startTime: "10:00", endTime: "12:30" },
+    { dayOfWeek: 5, startTime: "14:30", endTime: "17:30" },
+    { dayOfWeek: 6, startTime: "10:00", endTime: "13:00" },
+  ];
+  await prisma.$transaction([
+    prisma.availability.deleteMany(),
+    prisma.availability.createMany({ data: hours }),
+  ]);
 
+  const realSettings = {
+    clinicName: CLINIC_NAME,
+    tagline: CLINIC_TAGLINE,
+    phone: "06 06 19 74 71",
+    email: "",
+    whatsapp: "+212606197471",
+    address: "34 Av. Moulay Abdellah, Safi 46000",
+    mapEmbedUrl:
+      "https://maps.google.com/maps?q=32.282429,-9.23572&z=16&hl=fr&output=embed",
+    facebookUrl:
+      "https://web.facebook.com/p/Cabinet-ibn-sina-100057121523022/",
+    slotDuration: 30,
+    maxAdvanceDays: 60,
+  };
   await prisma.clinicSettings.upsert({
     where: { id: "singleton" },
-    update: { clinicName: CLINIC_NAME, tagline: CLINIC_TAGLINE },
-    create: {
-      id: "singleton",
-      clinicName: CLINIC_NAME,
-      tagline: CLINIC_TAGLINE,
-      phone: "+212 6 00 00 00 00",
-      email: "contact@cabinet-physio.com",
-      whatsapp: "+212600000000",
-      address: "12 Avenue de la Santé, Casablanca",
-      slotDuration: 45,
-      maxAdvanceDays: 60,
-    },
+    update: realSettings,
+    create: { id: "singleton", ...realSettings },
   });
 
   console.log("Seed completed.");
