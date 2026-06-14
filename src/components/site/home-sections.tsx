@@ -23,6 +23,7 @@ import type { ContentBlock, Faq, Service, Testimonial } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { FadeIn, Stagger, StaggerItem } from "@/components/site/motion";
 import { FaqAccordion } from "@/components/site/faq-accordion";
+import { THERAPIST_NAME, THERAPIST_TITLE } from "@/lib/constants";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Activity,
@@ -188,7 +189,7 @@ export function TherapistSection({ block }: { block: ContentBlock | null }) {
                 block?.image ??
                 "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=900&q=80"
               }
-              alt="Portrait de la kinésithérapeute"
+              alt="Portrait du kinésithérapeute"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
@@ -198,7 +199,7 @@ export function TherapistSection({ block }: { block: ContentBlock | null }) {
             <div className="flex items-center gap-2">
               <Award className="h-5 w-5 text-primary-700" aria-hidden />
               <p className="text-sm font-semibold text-primary-900">
-                Diplômée d&apos;État
+                Diplômé d&apos;État
               </p>
             </div>
           </div>
@@ -206,16 +207,15 @@ export function TherapistSection({ block }: { block: ContentBlock | null }) {
 
         <FadeIn delay={0.1} className="order-1 space-y-6 md:order-2">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary-600">
-            Votre praticienne
+            Votre praticien
           </p>
-          <h2 className="heading-display">{block?.title ?? "Dr. Heba Bouadil"}</h2>
+          <h2 className="heading-display">{block?.title ?? THERAPIST_NAME}</h2>
           <p className="font-medium text-primary-700">
-            {block?.subtitle ??
-              "Masseur-kinésithérapeute D.E. — Thérapie manuelle & sport"}
+            {block?.subtitle ?? THERAPIST_TITLE}
           </p>
           <p className="leading-relaxed text-gray-600">
             {block?.body ??
-              "Diplômée d'État avec une spécialisation en thérapie manuelle orthopédique et en rééducation du sportif, elle a accompagné plus de 3 000 patients."}
+              "Diplômé d'État avec une spécialisation en thérapie manuelle orthopédique et en rééducation du sportif, il a accompagné plus de 3 000 patients."}
           </p>
           <ul className="grid gap-3 sm:grid-cols-2">
             {[

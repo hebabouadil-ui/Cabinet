@@ -1,6 +1,11 @@
 import type { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import { CLINIC_NAME, CLINIC_TAGLINE } from "./constants";
+import {
+  CLINIC_NAME,
+  CLINIC_TAGLINE,
+  THERAPIST_NAME,
+  THERAPIST_TITLE,
+} from "./constants";
 
 const services = [
   {
@@ -186,9 +191,9 @@ const contentBlocks = [
   },
   {
     key: "therapist",
-    title: "Dr. Heba Bouadil",
-    subtitle: "Masseur-kinésithérapeute D.E. — Thérapie manuelle & sport",
-    body: "Diplômée d'État avec une spécialisation en thérapie manuelle orthopédique et en rééducation du sportif, elle a accompagné plus de 3 000 patients, des suites opératoires aux athlètes de haut niveau. Formations certifiées : McKenzie (MDT), Dry Needling, Kinésiotaping, Rééducation vestibulaire.",
+    title: THERAPIST_NAME,
+    subtitle: THERAPIST_TITLE,
+    body: "Diplômé d'État avec une spécialisation en thérapie manuelle orthopédique et en rééducation du sportif, il a accompagné plus de 3 000 patients, des suites opératoires aux athlètes de haut niveau. Formations certifiées : McKenzie (MDT), Dry Needling, Kinésiotaping, Rééducation vestibulaire.",
   },
 ];
 
@@ -208,7 +213,7 @@ export async function runSeed(prisma: PrismaClient) {
     where: { email: process.env.ADMIN_EMAIL ?? "admin@cabinet-physio.com" },
     update: {},
     create: {
-      name: "Dr. Heba Bouadil",
+      name: THERAPIST_NAME,
       email: process.env.ADMIN_EMAIL ?? "admin@cabinet-physio.com",
       password: adminPassword,
       role: "ADMIN",

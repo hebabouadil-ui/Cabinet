@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Award, GraduationCap, HeartHandshake, History } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+import { THERAPIST_NAME, THERAPIST_TITLE } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { FadeIn, Stagger, StaggerItem } from "@/components/site/motion";
 import { CtaSection } from "@/components/site/home-sections";
@@ -12,7 +13,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: "À propos",
   description:
-    "Découvrez notre cabinet de kinésithérapie, le parcours de votre praticienne, ses certifications et notre approche du soin.",
+    "Découvrez notre cabinet de kinésithérapie, le parcours de votre praticien, ses certifications et notre approche du soin.",
 };
 
 const certifications = [
@@ -66,7 +67,7 @@ export default async function AboutPage() {
                   therapist?.image ??
                   "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=900&q=80"
                 }
-                alt="Portrait de la kinésithérapeute"
+                alt="Portrait du kinésithérapeute"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
@@ -75,15 +76,14 @@ export default async function AboutPage() {
           </FadeIn>
           <FadeIn delay={0.1} className="space-y-6">
             <h2 className="font-display text-3xl font-semibold text-primary-900">
-              {therapist?.title ?? "Dr. Heba Bouadil"}
+              {therapist?.title ?? THERAPIST_NAME}
             </h2>
             <p className="font-medium text-primary-700">
-              {therapist?.subtitle ??
-                "Masseur-kinésithérapeute D.E. — Thérapie manuelle & sport"}
+              {therapist?.subtitle ?? THERAPIST_TITLE}
             </p>
             <p className="leading-relaxed text-gray-600">
               {therapist?.body ??
-                "Spécialisée en thérapie manuelle orthopédique et rééducation du sportif."}
+                "Spécialisé en thérapie manuelle orthopédique et rééducation du sportif."}
             </p>
             <div className="grid gap-4 sm:grid-cols-2">
               {[

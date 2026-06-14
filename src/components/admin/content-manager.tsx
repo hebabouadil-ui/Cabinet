@@ -44,7 +44,7 @@ type FaqItem = {
 const BLOCK_LABELS: Record<string, string> = {
   hero: "Section d'accueil (hero)",
   "about-intro": "Introduction « À propos »",
-  therapist: "Présentation de la praticienne",
+  therapist: "Présentation du praticien (nom + photo)",
 };
 
 const tabTrigger =
